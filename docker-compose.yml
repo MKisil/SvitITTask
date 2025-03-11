@@ -1,0 +1,42 @@
+services:
+  api:
+    container_name: test_task-api
+    build: .
+    volumes:
+      - .:/test_task
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - elasticsearch
+    env_file:
+      - .env.dev
+    restart: always
+
+  db:
+    container_name: test_task-db
+    image: postgres:17
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env.dev
+    restart: always
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.16.5
+    container_name: test_task-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS: -Xms512m -Xmx512m"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    env_file:
+      - .env.dev
+
+volumes:
+  postgres_data:
+  elasticsearch_data:
+
+
