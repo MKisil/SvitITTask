@@ -27,6 +27,7 @@ services:
     container_name: test_task-elasticsearch
     environment:
       - discovery.type=single-node
+      - xpack.security.http.ssl.enabled=false
       - "ES_JAVA_OPTS: -Xms512m -Xmx512m"
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
