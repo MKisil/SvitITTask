@@ -1,4 +1,6 @@
-from pydantic import BaseModel
+from typing import ClassVar
+
+from pydantic import BaseModel, ConfigDict
 
 
 class UserCreate(BaseModel):
@@ -10,8 +12,7 @@ class UserGet(BaseModel):
     id: int
     username: str
 
-    class Config:
-        from_attributes = True
+    model_config: ClassVar = ConfigDict(from_attributes=True)
 
 
 class Token(BaseModel):

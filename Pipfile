@@ -18,6 +18,8 @@ python-multipart = "*"
 elasticsearch = "*"
 python-magic = "*"
 libmagic = "*"
+pytest = "*"
+httpx = "*"
 
 [dev-packages]
 
